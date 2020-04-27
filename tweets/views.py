@@ -24,6 +24,4 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
     except:
         data['message'] = "Not Found"
         status = 404
-
-
     return JsonResponse(data, status=status)
