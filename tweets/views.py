@@ -4,11 +4,19 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, redirect
 from .models import Tweet
 from .forms import TweetForm
+from .serializers import TweetSerializer
 # Create your views here.
 def home_view(request, *args, **kwargs):
     return render(request, "pages/home.html", context={}, status=200)
 
 def tweet_create_view(request, *args, **kwargs):
+    serializer = TweetSerializer(data=request.POST or None)
+    if serializer.is_valid():
+        obj = serializer.save(user=request.user)
+        return JsonResponse(serializer.data, status=201)
+    return JsonResponse({}, status=400)
+
+def tweet_create_view_pure_django(request, *args, **kwargs):
     # print("ajax", request.is_ajax())
     user = request.user
     if not request.user.is_authenticated:
