@@ -25,7 +25,7 @@ SECRET_KEY = '*xy3qx3iw^9oa7o-m*4z8_yc*@@$1ol&6r6@r#$+_^e@3$$8i+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 LOGIN_URL = "/login"
 MAX_TWEET_LENGTH = 240
 TWEET_ACTION_OPTIONS = ["like", "unlike", 'retweet']
@@ -126,6 +126,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
+
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
 DEFAULT_RENDERER_CLASSES = [
