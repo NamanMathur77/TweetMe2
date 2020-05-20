@@ -12,13 +12,14 @@ export function TweetsComponent(props) {
     createTweet(newVal, (response, status)=>{
       if (status===201){
         tempNewTweets.unshift(response)
+        setNewTweets(tempNewTweets)
+
       } else{
         console.log(response)
         alert ("An error occured")
       }
     })
 
-    setNewTweets(tempNewTweets)
     textAreaRef.current.value = "";
   };
 
