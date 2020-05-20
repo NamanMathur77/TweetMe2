@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { loadTweets } from "../lookup";
+import { loadTweets, createTweet } from "../lookup";
 
 export function TweetsComponent(props) {
   const textAreaRef = React.createRef(); //through reference we can access the referenced field
@@ -9,11 +9,15 @@ export function TweetsComponent(props) {
     const newVal = textAreaRef.current.value;
     console.log(newVal)
     let tempNewTweets = [...newTweets] //copying the newTweets state declared earlier
-    tempNewTweets.unshift({//unshift moves the element to add in the stating whereas push put it in the end
-      content: newVal,
-      like: 0,
-      id: 1234
+    createTweet(newVal, (response, status)=>{
+      if (status===201){
+        tempNewTweets.unshift(response)
+      } else{
+        console.log(response)
+        alert ("An error occured")
+      }
     })
+
     setNewTweets(tempNewTweets)
     textAreaRef.current.value = "";
   };
