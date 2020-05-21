@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { loadTweets, createTweet } from "../lookup";
+import { apiTweetList, apiTweetCreate } from "./lookup";
 
 export function TweetsComponent(props) {
   const textAreaRef = React.createRef(); //through reference we can access the referenced field
@@ -9,7 +9,7 @@ export function TweetsComponent(props) {
     const newVal = textAreaRef.current.value;
     console.log(newVal)
     let tempNewTweets = [...newTweets] //copying the newTweets state declared earlier
-    createTweet(newVal, (response, status)=>{
+    apiTweetCreate(newVal, (response, status)=>{
       if (status===201){
         tempNewTweets.unshift(response)
         setNewTweets(tempNewTweets)
@@ -57,7 +57,7 @@ export function TweetsList(props) {
 
   useEffect(() => {
     if (tweetsDidSet === false){
-      const myCallback = (response, status) => {
+      const handleTweetListLookup = (response, status) => {
         if (status === 200) {
           setTweetsInit(response);
           setTweetsDidSet(true)
@@ -65,7 +65,7 @@ export function TweetsList(props) {
           alert("There was an error")
         }
       };
-      loadTweets(myCallback);
+      apiTweetList(handleTweetListLookup);
     }
 
   }, [tweetsInit,tweetsDidSet, setTweetsDidSet]);

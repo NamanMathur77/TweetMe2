@@ -15,7 +15,7 @@ function getCookie(name) {
 }
 
 
-function lookup(method, endpoint, callback, data){
+export function lookup(method, endpoint, callback, data){
   let jsonData;
   if(data){
     jsonData = JSON.stringify(data)
@@ -41,22 +41,22 @@ function lookup(method, endpoint, callback, data){
     }
     xhr.send(jsonData)
 }
+// before creation of the lookup.js in the tweets component
+// export function createTweet(newTweet, callback){
+//   lookup("POST", "/tweets/create/", callback, {content: newTweet})
+// }
 
-export function createTweet(newTweet, callback){
-  lookup("POST", "/tweets/create/", callback, {content: newTweet})
-}
-
-export function loadTweets(callback) {
-    lookup("GET", "/tweets/", callback)
-    // const xhr = new XMLHttpRequest()
-    // const method = 'GET'
-    // const url = "http://localhost:8000/api/tweets/"
-    // const responseType = "json"
-    // xhr.responseType = responseType
-    // xhr.open(method, url)
-    // xhr.onload = function(){
-    //   callback(xhr.response, xhr.status)
+// export function loadTweets(callback) {
+//     lookup("GET", "/tweets/", callback)
+//     // const xhr = new XMLHttpRequest()
+//     // const method = 'GET'
+//     // const url = "http://localhost:8000/api/tweets/"
+//     // const responseType = "json"
+//     // xhr.responseType = responseType
+//     // xhr.open(method, url)
+//     // xhr.onload = function(){
+//     //   callback(xhr.response, xhr.status)
   
-    // }
-    // xhr.send()
-  }
+//     // }
+//     // xhr.send()
+//   }
